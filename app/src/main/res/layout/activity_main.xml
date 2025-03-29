@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/snowWhite"
+    tools:context=".MainActivity">
+
+    <!-- Added Space -->
+    <Space
+        android:id="@+id/spaceTop"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <!-- dynamic text for connect -->
+    <TextView
+        android:id="@+id/textConnecting"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Connecting..."
+        android:fontFamily=""
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spaceTop"/>
+
+
+    <!-- Button where will be messages from AI-->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/buttonMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spaceTop"
+
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/message"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Card Temperature -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="250dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="40dp"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonMessage">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates_medium"
+            android:textAllCaps="false"
+            android:textSize="32dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:text="Temperature" />
+
+        <View
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/circle"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Card Humidity -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="250dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="30dp"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates_medium"
+            android:textAllCaps="false"
+            android:textSize="32dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:text="Humidity" />
+
+        <View
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/circle"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Card Light -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="250dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="30dp"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates_medium"
+            android:textAllCaps="false"
+            android:textSize="32dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:text="Light" />
+
+        <View
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/circle"/>
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- Card Buttons -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="@color/lightBlue">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <!-- Button Home -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/buttonHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/home"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"
+                android:layout_gravity="center" />
+
+            <!-- Button Light -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/buttonLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/light"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"
+                android:layout_gravity="center" />
+
+            <!-- Button History -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/buttonHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/history"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"
+                android:layout_gravity="center" />
+
+            <!-- Button Settings -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/buttonSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/settings"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"
+                android:layout_gravity="center" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
