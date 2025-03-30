@@ -38,23 +38,33 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spaceTop"
-
         android:layout_marginEnd="20dp"
         android:src="@drawable/message"
         android:background="@android:color/transparent"
         />
 
+
+    <!-- CardViews Information -->
+    <LinearLayout
+        android:id="@+id/layoutCards"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMessage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
     <!-- Card Temperature -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardViewTemperature"
         android:layout_width="250dp"
         android:layout_height="120dp"
-        android:layout_marginTop="40dp"
         app:cardElevation="15dp"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonMessage">
+        android:layout_margin="16dp"
+        android:layout_gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,15 +86,13 @@
 
     <!-- Card Humidity -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/cardViewHumidity"
         android:layout_width="250dp"
         android:layout_height="120dp"
-        android:layout_marginTop="30dp"
         app:cardElevation="15dp"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardView">
+        android:layout_margin="16dp"
+        android:layout_gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
@@ -106,15 +114,13 @@
 
     <!-- Card Light -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
+        android:id="@+id/cardViewLight"
         android:layout_width="250dp"
         android:layout_height="120dp"
-        android:layout_marginTop="30dp"
         app:cardElevation="15dp"
         app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardView2">
+        android:layout_gravity="center"
+        android:layout_margin="16dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -133,63 +139,26 @@
             android:layout_marginStart="30dp"
             android:background="@drawable/circle"/>
     </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 
     <!-- Card Buttons -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="60dp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlue"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardBackgroundColor="@color/lightBlue">
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_alignParentBottom="true"
+        app:itemIconSize="35dp"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemRippleColor="@color/snowWhite"
+        app:itemIconTint="@color/nav_icons_color"
+        app:itemTextColor="@color/nav_icons_color">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <!-- Button Home -->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/buttonHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/home"
-                android:background="@android:color/transparent"
-                android:layout_weight="1"
-                android:layout_gravity="center" />
-
-            <!-- Button Light -->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/buttonLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/light"
-                android:background="@android:color/transparent"
-                android:layout_weight="1"
-                android:layout_gravity="center" />
-
-            <!-- Button History -->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/buttonHistory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/history"
-                android:background="@android:color/transparent"
-                android:layout_weight="1"
-                android:layout_gravity="center" />
-
-            <!-- Button Settings -->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/buttonSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/settings"
-                android:background="@android:color/transparent"
-                android:layout_weight="1"
-                android:layout_gravity="center" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
