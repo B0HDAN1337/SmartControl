@@ -8,7 +8,11 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
+import android.Manifest
+
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +20,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 class SettingsFragment : Fragment() {
 
@@ -46,14 +52,23 @@ class SettingsFragment : Fragment() {
 
         //Enable Bluetooth on click
         buttonConnect.setOnClickListener{
+            //Verification if bluetooth enabled
             if(!bluetoothAdapter.isEnabled)
             {
                 val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 startActivity(enableBtIntent);
+                Log.d("BluetoothTest", "Bluetooth was disabled. Prompting to enable.")
             }
-            else // if bluetooth enabled, search devices
+            //Verification if Location enabled
+            else if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             {
-                 bluetoothAdapter.startDiscovery()
+                ActivityCompat.requestPermissions(requireActivity(),
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            }
+            // if permissions are available, enable search
+            else {
+                bluetoothAdapter.cancelDiscovery()
+                bluetoothAdapter.startDiscovery()
             }
         }
     }
