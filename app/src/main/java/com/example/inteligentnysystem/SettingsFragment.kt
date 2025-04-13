@@ -10,8 +10,11 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.Manifest
+import android.content.ComponentName
+import android.content.ServiceConnection
 
 import android.os.Bundle
+import android.os.IBinder
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -25,6 +28,7 @@ import androidx.core.content.ContextCompat
 
 class SettingsFragment : Fragment() {
 
+    private var bluetoothService: BluetoothService? = null
     private lateinit var deviceListItem: ListView
     private lateinit var deviceListAdapter: ArrayAdapter<String>
     private val deviceNames = ArrayList<String>()
@@ -56,7 +60,7 @@ class SettingsFragment : Fragment() {
             if(!bluetoothAdapter.isEnabled)
             {
                 val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                startActivity(enableBtIntent);
+                startActivity(enableBtIntent)
                 Log.d("BluetoothTest", "Bluetooth was disabled. Prompting to enable.")
             }
             //Verification if Location enabled
@@ -70,6 +74,24 @@ class SettingsFragment : Fragment() {
                 bluetoothAdapter.cancelDiscovery()
                 bluetoothAdapter.startDiscovery()
             }
+        }
+
+        //Connect to the device from list
+        deviceListItem.setOnItemClickListener{ _, _, position, _ ->
+            val selectedItem = deviceNames[position]
+            val deviceAddress = selectedItem.takeLast(17)
+            val device = bluetoothAdapter.getRemoteDevice(deviceAddress)
+
+            bluetoothAdapter.cancelDiscovery()
+            bluetoothService?.connectToDevice(device)
+        }
+
+        //Disconnect device
+        var deviceDisconnect: Button = view.findViewById(R.id.buttonDisconnect)
+
+        deviceDisconnect.setOnClickListener{
+            bluetoothAdapter.cancelDiscovery()
+            bluetoothService?.disconnect()
         }
     }
 
@@ -96,10 +118,25 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    //connect the BluetoothService
+    private val serviceConnection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
+            bluetoothService = (binder as BluetoothService.LocalBinder).getService()
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            bluetoothService = null
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
         requireActivity().registerReceiver(receiver, filter)
+
+        //Start BluetoothService
+        val intent = Intent(requireContext(), BluetoothService::class.java)
+        requireContext().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
     override fun onStop() {
