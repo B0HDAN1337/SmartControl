@@ -72,7 +72,21 @@ class BluetoothService : Service() {
                 try {
                     val bytes = inputStream.read(buffer)
                     val received = String(buffer, 0, bytes)
-                    Log.d("BluetoothService", "Received: $received")
+                    var receivedSplit = received.split(" ")
+                    if(receivedSplit.size == 3)
+                    {
+                        val humidity = receivedSplit[0]
+                        val temperature = receivedSplit[1]
+                        val light = receivedSplit[2]
+                        Log.d("BluetoothService", "Received: $humidity, $temperature, $light")
+
+                        //Send Broadcast
+                        val intent = Intent("com.example.inteligentnysystem.DATA_RECEIVED")
+                        intent.putExtra("humidity", humidity)
+                        intent.putExtra("temperature", temperature)
+                        intent.putExtra("light", light)
+                        sendBroadcast(intent)
+                    }
                 }catch (e: IOException)
                 {
                     Log.d("BluetoothService", "Disconnected", e)
