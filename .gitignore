@@ -15,3 +15,51 @@
 local.properties
 .idea
 /.idea
+
+# Build results
+bin/
+obj/
+*.dll
+*.exe
+*.app
+*.log
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code settings
+.vscode/
+.history/
+
+# NuGet
+*.nupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Dotnet CLI
+project.json.lock
+*.dbmdl
+
+# Entity Framework
+Migrations/
+
+# Secrets
+secrets.json
+*.pfx
+
+# IIS Express
+.vs/
+*.vspscc
+
+# Logs and backups
+*.log
+*.bak
+*.tmp
+
+# Rider or JetBrains IDEs
+.idea/
