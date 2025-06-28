@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteligentServer", "InteligentServer\InteligentServer.csproj", "{E4053360-63B3-24F1-A319-63C71025A92B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4053360-63B3-24F1-A319-63C71025A92B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4053360-63B3-24F1-A319-63C71025A92B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4053360-63B3-24F1-A319-63C71025A92B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4053360-63B3-24F1-A319-63C71025A92B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D86907E-4E94-4F17-8919-C3988110DB7D}
+	EndGlobalSection
+EndGlobal

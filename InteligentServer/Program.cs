@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using InteligentServer.Data;
+
 namespace InteligentServer
 {
     public class Program
@@ -15,7 +18,18 @@ namespace InteligentServer
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Add DbContext
+            builder.Services.AddDbContext<InteligentAppDbContext>(options =>
+            options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<InteligentAppDbContext>();
+                DbInitializer.Initializer(context);
+            }
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
