@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using InteligentServer.Data;
+using InteligentServer.Repository;
+using InteligentServer.Service;
 
 namespace InteligentServer
 {
@@ -21,6 +23,12 @@ namespace InteligentServer
             // Add DbContext
             builder.Services.AddDbContext<InteligentAppDbContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // Repository
+            builder.Services.AddScoped<ISensorDataRepository, SensorDataRepository>();
+
+            // Service
+            builder.Services.AddScoped<ISensorDataService, SensorDataService>();
 
             var app = builder.Build();
 

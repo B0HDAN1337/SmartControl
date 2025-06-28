@@ -1,3 +1,4 @@
+using InteligentServer.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace InteligentServer.Data
@@ -9,5 +10,6 @@ namespace InteligentServer.Data
         {
         }
     
+    public DbSet<SensorData> SensorDatas { get; set; }
     }
 }
