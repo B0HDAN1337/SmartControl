@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.google.android.material:material:1.3.0-alpha03")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
