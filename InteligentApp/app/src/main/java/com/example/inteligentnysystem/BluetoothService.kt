@@ -5,12 +5,21 @@ import android.app.Service
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.content.Intent
+import android.icu.text.DateFormat
+import android.icu.text.SimpleDateFormat
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import androidx.annotation.RequiresApi
+import com.example.inteligentnysystem.Data.SensorData
+import com.example.inteligentnysystem.Network.SensorService
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
+import java.sql.Timestamp
+import java.util.Date
+import java.util.Locale
 import java.util.UUID
 
 
@@ -64,6 +73,7 @@ class BluetoothService : Service() {
         private val inputStream: InputStream = bluetoothSocket.inputStream
         private val outputStream: OutputStream = bluetoothSocket.outputStream
 
+        @RequiresApi(Build.VERSION_CODES.N)
         override fun run()
         {
             val buffer = ByteArray(1024)
@@ -75,17 +85,23 @@ class BluetoothService : Service() {
                     var receivedSplit = received.split(" ")
                     if(receivedSplit.size == 3)
                     {
-                        val humidity = receivedSplit[0]
-                        val temperature = receivedSplit[1]
-                        val light = receivedSplit[2]
+                        val humidity = receivedSplit[0].toFloat()
+                        val temperature = receivedSplit[1].toFloat()
+                        val light = receivedSplit[2].toFloat()
+                        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+                        val timestamp = sdf.format(Date())
                         Log.d("BluetoothService", "Received: $humidity, $temperature, $light")
 
+                        if(humidity != null && temperature != null && light != null) {
+                            val data = SensorData(temperature, humidity, light, timestamp)
+                            SensorService.send(data)
+                        }
                         //Send Broadcast
-                        val intent = Intent("com.example.inteligentnysystem.DATA_RECEIVED")
-                        intent.putExtra("humidity", humidity)
-                        intent.putExtra("temperature", temperature)
-                        intent.putExtra("light", light)
-                        sendBroadcast(intent)
+//                        val intent = Intent("com.example.inteligentnysystem.DATA_RECEIVED")
+//                        intent.putExtra("humidity", humidity)
+//                        intent.putExtra("temperature", temperature)
+//                        intent.putExtra("light", light)
+//                        sendBroadcast(intent)
                     }
                 }catch (e: IOException)
                 {

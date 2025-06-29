@@ -13,7 +13,10 @@ namespace InteligentServer
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddAuthorization();
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -29,6 +32,15 @@ namespace InteligentServer
 
             // Service
             builder.Services.AddScoped<ISensorDataService, SensorDataService>();
+
+            // Cors
+            builder.WebHost.UseUrls("http://0.0.0.0:2000");
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
 
             var app = builder.Build();
 
@@ -47,6 +59,8 @@ namespace InteligentServer
             }
 
             app.MapControllers();
+
+            app.UseCors("AllowAll");
 
             app.Run();
         }
